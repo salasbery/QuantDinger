@@ -1,0 +1,91 @@
+Indices/全球指數,,,,,"需要更多產品請聯繫客服或官網查詢
+客服：https://t.me/iticksupport
+官網：https://itick.org",
+"交易時間
+與指數較易所市場一致",,,,,,
+symbol,name,description,type,region,country,type
+000001,上證指數,Shanghai Component Index,indices,gb,China,Composite Index
+399001,深證成指,Shenzhen Component Index,indices,gb,China,Composite Index
+399006,創業板指數,ChiNext Index,indices,gb,China,Composite Index
+000300,滬深300指數,CSI 300 Index,indices,gb,China,Composite Index
+000905,中證500,CSI 500 Index,indices,gb,China,Composite Index
+000852,中證1000,CSI 1000 Index,indices,gb,China,Composite Index
+000680,科创指数,Technology Innovation Board Composite Index,indices,gb,China,Composite Index
+CSI300,沪深 300 反向指数,CSI300 Inversed Index,indices,gb,China,Composite Index
+CHN50,富時中國A50 CFD 指數,FTSE China A50 CFD Index,indices,gb,China,CFD Index
+XIN9,富時中國A50指數,FTSE China A50 Index,indices,gb,China,Composite Index
+HSI,恆生指數,Hang Seng Index,indices,gb,"Hong Kong, China",Composite Index
+HSCEI,恆生中國企業指數,Hang Seng China Enterprises Index,indices,gb,"Hong Kong, China",Composite Index
+HSCCI,恆生中國企業指數（紅籌指數）,Hang Seng China-Affiliated Corporations Index,indices,gb,"Hong Kong, China",Composite Index
+HSTECH,恆生科技指數,Hang Seng TECH Index,indices,gb,"Hong Kong, China",Composite Index
+HKG33,恆生指數,Hang Seng Index,indices,gb,"Hong Kong, China",CFD Index
+HIS,恆生期貨指數,Hang Seng Futures Index,indices,gb,"Hong Kong, China",Composite Index
+IXIC,美國那斯達克指數,NASDAQ Composite Index,indices,gb,United States,Composite Index
+DJI,美國道瓊工業平均指數,Dow Jones Industrial Average Index,indices,gb,United States,Composite Index
+DJICFD,美國道瓊工業平均指數（cfd）,Dow Jones Industrial Average Index,indices,gb,United States,CFD Index
+SPX,美國標準普爾500指數,S&P 500 Index,indices,gb,United States,Composite Index
+NAS100,美國100指數,US 100 CFD Index,indices,gb,United States,CFD Index
+US30,美國道瓊工業指數,Dow Jones Industrial Average Index,indices,gb,United States,Composite Index
+US2000,美國羅素2000指數,Russel 2000 Index,indices,gb,United States,Composite Index
+FAANG,美國大型科技公司 (FAANG),US Big Tech (FAANG),indices,gb,United States,Composite Index
+SPX500USD,美國標普 500 指數,S&P 500 Index,indices,gb,United States,CFD Index
+US30USD,美國道瓊 30 指數,Dow Jones Industrial Average,indices,gb,United States,CFD Index
+DXY,美國美元指數,US Dollar Index,indices,gb,United States,CFD Index
+VIX,美國波動率 標普 500,VOLATILITY S&P 500,indices,gb,United States,Composite Index
+ME,美國墨西哥MXX,Mexico MXX,indices,gb,Mexico,Composite Index
+JPN225,日本指數,Japan CFD Index,indices,gb,Japan,CFD Index
+JP225,日經225指數,Nikkei 225 Index,indices,gb,Japan,Composite Index
+TOPIX,日本股價指數,Tokyo Stock Price Index,indices,gb,Japan,Composite Index
+JPXNIKKEI400,日經400指數,Nikkei 400 Index,indices,gb,Japan,Composite Index
+JPYBASKET,日元指數,Yen Basket,indices,gb,Japan,Composite Index
+DAX,德国DAX指數,DAX Performance Index,indices,gb,Germany,Composite Index
+GER30,德國DAX30 CFD 指數,DAX Performance CFD Index,indices,gb,Germany,CFD Index
+GER40,德國 40 CFD 指數,German 40 CFD Index,indices,gb,Germany,CFD Index
+MIDDE50,德國Mid50指數,German Mid50 index,indices,gb,Germany,Composite Index
+TECDE30,德國Tech30指數 ,German Tech30 Index,indices,gb,Germany,Composite Index
+UK100,英国富時100 CFD 指數,FTSE 100 CFD Index,indices,gb,United Kingdom,CFD Index
+UKX,英国富時100指數,FTSE 100 Index,indices,gb,United Kingdom,Composite Index
+AUS200,澳洲S&P200 CFD 指數,S&P/ASX 200 CFD Index,indices,gb,Australia,CFD Index
+XJO,澳洲200指數,ASX 200 Index,indices,gb,Australia,Composite Index
+FRA40,法國CAC 40指數,CAC 40 Index,indices,gb,France,Composite Index
+FR40EUR,法國 CAC40 指數,CAC 40 Index,indices,gb,France,CFD Index
+EUSTX50,欧洲STOXX50指数,Euro Stoxx 50 Index,indices,gb,Europe,Composite Index
+ESP35,伊比利亞指數 (IBEX) ,Iberian Index (IBEX),indices,gb,Spain,Composite Index
+NETH25,荷蘭 25 指數,Netherlands 25 Index,indices,gb,Netherlands,Composite Index
+SWI20,瑞士 20 指數,Switzerland 20 Index,indices,gb,Switzerland,Composite Index
+RTSI,俄羅斯RTS,Russia RTS,indices,gb,Russia,Composite Index
+BEL20,比利時BEL20,Belgium BEL20,indices,gb,Belgium,Composite Index
+IT40,義大利富時MIB,Italian FTSE MIB,indices,gb,Italy,CFD Index
+SPA35,西班牙IBEX35,Spanish IBEX35,indices,gb,Spain,Composite Index
+IBEX35,西班牙 IBEX35 指數,IBEX35,indices,gb,Spain,CFD Index
+SENSEX,孟買SENSEX,Mumbai SENSEX,indices,gb,India,Composite Index
+IX0001,台灣加權指數,Taiwan Weighted Index,indices,gb,"Taiwan, China",Composite Index
+CHNTECH,中國科技公司 (百度、BILI NETES、IQ和WB),"Chinese Technology (BIDU, BILI NTES, IQ and WB)",indices,gb,China,Composite Index
+ATMX,中國大型科技公司 (ATMX),Big China Tech (ATMX),indices,gb,China,Composite Index
+CHNECOMM,中國電商 (阿里巴巴、京東、拼多多、 TCOM 與 TME),"Chinese Ecommerce (BABA, JD, PDD, TCOM and TME)",indices,gb,China,Composite Index
+AIRLINES,航空公司 (AAL、DAL、LUV、JBLU 和 UAL),"Airlines (AAL, DAL, LUV, JBLU and UAL)",indices,gb,United States,Composite Index
+BIOTECH,生物技術 (ABBV、AMGN、BMY、GILD 和 VRTX),"Biotechnology (ABBV, AMGN, BMY, GILD and VRTX)",indices,gb,United States,Composite Index
+CRYPTOSTOCK,加密貨幣股票 (BTBB、COIN、HUT、MARA 和 RIOT),"Cryptocurrency Stocks (BTBB, COIN, HUT, MARA and RIOT)",indices,gb,United States,Composite Index
+EMBASKET,新興市場指數,Emerging Markets Basket,indices,gb,Global,Composite Index
+ESPORTS,電子競技和遊戲 (AMD、MSFT、EA、NVDA 和 SONY),"Esports & Gaming (AMD, MSFT, EA, NVDA and SONY)",indices,gb,Global,Composite Index
+TRAVEL,旅遊和酒店 (BKNG、H、HLT、MAR 和 TRIP),"Travel & Hospitality (BKNG, H, HLT, MAR and TRIP)",indices,gb,United States,Composite Index
+URANIUM,鈾 (CCJ、DNN、NXE 和 URNM),"Uranium (CCJ, DNN, NXE and URNM)",indices,gb,Global,Composite Index
+USAUTO,美國汽車 (F、GM、HOG、STLA 和 TSLA),"US Automative (F, GM, HOG, STLA and TSLA)",indices,gb,United States,Composite Index
+USBANKS,美國銀行 (BAC、C、 COF、JPM 和 WFC),"US Banks (BAC, C, COF, JPM and WFC)",indices,gb,United States,Composite Index
+USECOMM,美國電商 (AMZN、EBAY、ETSY、SHOP、W 和 WMT),"US Ecommerce (AMZN, EBAY, ETSY, SHOP, W and WMT)",indices,gb,United States,Composite Index
+FBMKLCI,大馬綜合指數,FTSE Bursa Malaysia Index,indices,gb,Malaysia,Composite Index
+FBMT100,大馬100指數,FTSE Bursa Malaysia Top 100 Index,indices,gb,Malaysia,Composite Index
+FBM70,大馬70指數,FTSE Bursa Malaysia Top 70 Index,indices,gb,Malaysia,Composite Index
+SE30,瑞典30指數,Sweden 30 Index,indices,gb,Sweden,Composite Index
+NOR25,挪威25指數,Norway 25 Index,indices,gb,Norway,Composite Index
+CA60,加拿大60指數,Canada 60 Index,indices,gb,Canada,Composite Index
+SA40,南非40指數,South Africa 40 Index,indices,gb,South Africa,Composite Index
+KOSPI,韓國綜合股價指數,Korea Composite Stock Price Index,indices,gb,South Korea,Composite Index
+KOSPI200,韓國200指數,KOSPI 200 Index,indices,gb,South Korea,Composite Index
+STI,新加坡海峡时报指数,STI Index,indices,gb,Singapore,Composite Index
+FSTAS,新加坡富时海峡全股指数,FTSE ST Index,indices,gb,Singapore,Composite Index
+IDX80,印尼證交所 80 指數,IDC 80 Index,indices,gb,Indonesia,Composite Index
+JII,印尼雅加達伊斯蘭指數,Jakarta Islamic Index,indices,gb,Indonesia,Composite Index
+COMPOSITE,印尼證交所綜合指數,IDX Composite Index,indices,gb,Indonesia,Composite Index
+BVSPX,巴西指数美元期货,Bovespa CFD Index,indices,gb,Brazil,CFD Index
+EU50EUR,歐洲斯托克 50 指數,Euro Stoxx 50 Index,indices,gb,European Union,CFD Index

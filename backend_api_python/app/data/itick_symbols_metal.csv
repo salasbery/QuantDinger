@@ -1,0 +1,28 @@
+Metal/貴金屬商品,,,,,"需要更多產品請聯繫客服或官網查詢
+客服：https://t.me/iticksupport
+官網：https://itick.org"
+"交易時間 時區（America/New_York）
+週日至週五：18:05 - 16:59",,,,,
+symbol,name,description,type,region,
+XAUUSD,黃金/美元,Gold/USD,forex,gb,
+XAUAUD,黃金/澳元,Gold/AUD,forex,gb,
+XAUCNH,黃金/離岸人民幣,Gold/Offshore Chinese Renminbi,forex,gb,
+XAUEUR,黃金/歐元,Gold/EUR,forex,gb,
+XAUSGD,黃金/新加坡元,Gold/SGD,forex,gb,
+XAUTHB,黃金/泰銖,Gold/Thai Baht,forex,gb,
+XAUGBP,黃金/英鎊,XAUGBP,forex,gb,
+XAUXAG,黃金/白銀,XAUXAG,forex,gb,
+XAGEUR,白銀/歐元,Silver/EUR,forex,gb,
+XAGSGD,白銀/新加坡元,Silver/SGD,forex,gb,
+XAGUSD,白銀/美元,XAGUSD,forex,gb,
+XPTUSD,鉑金/美元,XPTUSD,forex,gb,
+XPDUSD,钯金/美元,XPDUSD,forex,gb,
+XCUUSD,铜/美元,XCUUSD,forex,gb,
+ALUMINUM,铝/美元,ALUMINUM,forex,gb,
+NICKEL,镍/美元,NICKEL,forex,gb,
+LEAD,铅/美元,LEAD,forex,gb,
+ZINC,锌/美元,ZINC,forex,gb,
+XAUCNY,黃金/人民幣,XAUCNY,forex,gb,
+XAGCNY,白銀/人民幣,XAGCNY,forex,gb,
+XAUHKD,黃金/港幣,XAUHKD,forex,gb,
+XAGHKD,白銀/港幣,XAGHKD,forex,gb,
