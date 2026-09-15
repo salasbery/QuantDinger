@@ -108,51 +108,73 @@ class SymbolMapper:
         }
     
     def _load_csv(self, filepath: Path, key_col: str, val_cols: List[str]) -> Dict[str, Tuple]:
-        """Generic CSV loader."""
+        """Generic CSV loader that skips banner rows and finds the real header."""
         mapping = {}
         if not filepath.exists():
             logger.warning(f"CSV not found: {filepath}")
             return mapping
         try:
             with open(filepath, 'r', encoding='utf-8-sig') as f:
-                reader = csv.DictReader(f)
+                reader = csv.reader(f)
+                header = None
+                header_idx = {}
                 for row in reader:
-                    key = row.get(key_col, '').strip().upper()
-                    if key:
-                        vals = tuple(row.get(c, '').strip() for c in val_cols)
-                        mapping[key] = vals
+                    if not row or not any(c.strip() for c in row):
+                        continue
+                    cells = [c.strip() for c in row]
+                    if header is None:
+                        # Find the header row (contains the key column name)
+                        low = [c.lower() for c in cells]
+                        if key_col.lower() in low:
+                            header = cells
+                            header_idx = {c: i for i, c in enumerate(cells)}
+                            continue
+                    else:
+                        ki = header_idx.get(key_col)
+                        if ki is None or ki >= len(cells):
+                            continue
+                        key = cells[ki].upper()
+                        if not key:
+                            continue
+                        vals = []
+                        for c in val_cols:
+                            ci = header_idx.get(c)
+                            val = cells[ci] if ci is not None and ci < len(cells) else ''
+                            vals.append(val)
+                        mapping[key] = tuple(vals)
         except Exception as e:
             logger.error(f"Failed to load {filepath}: {e}")
+            logger.exception("CSV load traceback")
         return mapping
     
     def _load_itick_indices(self):
         self._itick_indices = self._load_csv(
             CSV_DIR / "itick_symbols_indices.csv",
-            "symbol", ["code", "region"]
+            "symbol", ["symbol", "region"]
         )
     
     def _load_itick_forex(self):
         self._itick_forex = self._load_csv(
             CSV_DIR / "itick_symbols_forex.csv",
-            "symbol", ["code", "region"]
+            "symbol", ["symbol", "region"]
         )
     
     def _load_itick_metal(self):
         self._itick_metal = self._load_csv(
             CSV_DIR / "itick_symbols_metal.csv",
-            "symbol", ["code", "region"]
+            "symbol", ["symbol", "region"]
         )
     
     def _load_itick_fund(self):
         self._itick_fund = self._load_csv(
             CSV_DIR / "itick_symbols_fund_us.csv",
-            "symbol", ["code", "region", "exchange"]
+            "symbol", ["symbol", "region", "exchange"]
         )
     
     def _load_itick_future_hk(self):
         self._itick_future_hk = self._load_csv(
             CSV_DIR / "itick_symbols_future_hk.csv",
-            "Code", ["Description", "type", "region"]
+            "Code", ["type", "region"]
         )
     
     def get_futu_symbol(self, symbol: str) -> Optional[str]:
@@ -190,7 +212,7 @@ class SymbolMapper:
         s = symbol.strip().upper()
         v = self._itick_future_hk.get(s)
         if v:
-            return (v[0], v[2])  # (code, region)
+            return (s, v[1])  # (code, region) - code is the symbol itself
         return None
 
 
@@ -202,10 +224,10 @@ class FutuOpenDProvider:
     """FutuOpenD via Cloudflare Tunnel."""
     
     def __init__(self):
-        self.base_url = os.getenv(
-            "FUTUOPEND_URL",
-            "https://judges-excited-tribe-yamaha.trycloudflare.com"
-        ).rstrip("/")
+        self.base_url = os.getenv("FUTUOPEND_URL", "").strip().rstrip("/")
+        self.enabled = bool(self.base_url)
+        if not self.base_url:
+            logger.info("FutuOpenD disabled: FUTUOPEND_URL not set")
         self.session = requests.Session()
         self.session.timeout = 30
         self.mapper = SymbolMapper()
@@ -222,6 +244,8 @@ class FutuOpenDProvider:
             return 0
     
     def fetch_kline(self, symbol: str, tf: str, limit: int, start: Optional[str] = None) -> List[Dict]:
+        if not self.enabled:
+            return []
         futu_symbol = self.mapper.get_futu_symbol(symbol)
         if not futu_symbol:
             return []
@@ -241,6 +265,8 @@ class FutuOpenDProvider:
             return []
     
     def fetch_snapshot(self, symbol: str) -> Dict:
+        if not self.enabled:
+            return {}
         futu_symbol = self.mapper.get_futu_symbol(symbol)
         if not futu_symbol:
             return {}
@@ -425,29 +451,33 @@ class UnifiedMarketDataSource(BaseDataSource):
         """Select provider chain based on symbol and market."""
         s = symbol.strip().upper()
         
+        def _chain(providers):
+            # Drop FutuOpenD entries when the tunnel is not configured
+            return [p for p in providers if not (p[0] == "futu" and not self.futu.enabled)]
+        
         # HSI Futures - FutuOpenD primary, iTick Indices/FutureHK fallback
         if s in ("HSI", "HSIF", "HSIMAIN", "HIS", "MHI", "HTI", "MCH") or s == "HK.HSImain":
-            return [
+            return _chain([
                 ("futu", self.futu),
                 ("itick_indices", self.itick_indices),
                 ("itick_future_hk", self.itick_future_hk),
                 ("fallback", self._get_fallback()),
-            ]
+            ])
         
         # QQQ - FutuOpenD primary, iTick Fund fallback
         if s in ("QQQ", "US.QQQ"):
-            return [
+            return _chain([
                 ("futu", self.futu),
                 # ("itick_fund", self.itick_fund),  # Not implemented yet
                 ("fallback", self._get_fallback()),
-            ]
+            ])
         
         # HK Stocks - FutuOpenD if available, else fallback
         if s.isdigit() and len(s) <= 5:
-            return [
+            return _chain([
                 ("futu", self.futu),
                 ("fallback", self._get_fallback()),
-            ]
+            ])
         
         # Global Indices - iTick Indices
         if s in ("SPX", "DJI", "IXIC", "NAS100", "HSTECH", "HSCEI", "HSCCI", "VIX", "DXY"):
@@ -509,6 +539,9 @@ class UnifiedMarketDataSource(BaseDataSource):
                         volume=r.get("volume", 0)
                     ))
                 return klines
+            elif provider_name == "fallback":
+                # HKStockDataSource implements get_kline (before_time/after_time), not fetch_kline
+                return provider.get_kline(symbol, tf, limit, after_time=after_ts)
             else:
                 # iTick providers use timestamp pagination
                 records = provider.fetch_kline(symbol, tf, limit, after_ts)
@@ -575,11 +608,11 @@ class UnifiedMarketDataSource(BaseDataSource):
         return all_klines
     
     def get_ticker(self, symbol: str) -> Dict[str, Any]:
-        """Get latest ticker - try FutuOpenD first for HK/US, else fallback."""
+        """Get latest ticker - FutuOpenD snapshot first, else latest kline from the chain."""
         s = symbol.strip().upper()
         
-        # Try FutuOpenD for supported symbols
-        if s in ("HSI", "HSIF", "HSIMAIN", "QQQ", "US.QQQ") or s.isdigit() or s.startswith(("HK.", "US.")):
+        # Try FutuOpenD snapshot for supported symbols
+        if self.futu.enabled and (s in ("HSI", "HSIF", "HSIMAIN", "QQQ", "US.QQQ") or s.isdigit() or s.startswith(("HK.", "US."))):
             snap = self.futu.fetch_snapshot(symbol)
             if snap:
                 return {
@@ -594,7 +627,32 @@ class UnifiedMarketDataSource(BaseDataSource):
                     "symbol": symbol,
                 }
         
-        # Fallback
+        # Derive latest price from the kline chain (iTick indices/forex/futures, Tencent fallback)
+        try:
+            klines = self.get_kline(symbol, "1m", 2)
+            # Daily fallback: some providers only return daily bars when market closed
+            if not klines:
+                klines = self.get_kline(symbol, "1D", 2)
+            if klines:
+                last = klines[-1]
+                prev = klines[-2] if len(klines) > 1 else last
+                change = round(float(last["close"]) - float(prev["close"]), 4)
+                change_percent = round(change / float(prev["close"]) * 100, 4) if prev["close"] else 0
+                return {
+                    "last": last["close"],
+                    "change": change,
+                    "changePercent": change_percent,
+                    "high": last["high"],
+                    "low": last["low"],
+                    "open": last["open"],
+                    "previousClose": prev["close"],
+                    "time": last["time"],
+                    "symbol": symbol,
+                }
+        except Exception as e:
+            logger.warning(f"get_ticker kline chain failed for {symbol}: {e}")
+        
+        # Final fallback
         return self._get_fallback().get_ticker(symbol)
     
     def fetch_history_range(
